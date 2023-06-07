@@ -9,6 +9,9 @@ public class HelloController {
 
     @FXML
     protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+        String expression = "(1+(2+3*4))";
+        //String expression = "a+b*(c^d-e)^(f+g*h)-i";
+        PolishExpression p=new PolishExpression(expression);
+        welcomeText.setText(p.getPolish());
     }
 }

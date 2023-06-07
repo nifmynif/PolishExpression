@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/19-ea+7/javafx-base-19-ea+7-win.jar!/com/sun/javafx/event/CompositeEventHandler.class" charset="GBK" />
+    <file url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/19-ea+7/javafx-base-19-ea+7-win.jar!/com/sun/javafx/event/EventHandlerManager.class" charset="GBK" />
+    <file url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/19-ea+7/javafx-base-19-ea+7-win.jar!/com/sun/javafx/event/EventUtil.class" charset="UTF-16BE" />
+    <file url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/19-ea+7/javafx-base-19-ea+7-win.jar!/javafx/event/Event.class" charset="GBK" />
+    <file url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/19-ea+7/javafx-fxml-19-ea+7-win.jar!/javafx/fxml/FXMLLoader.class" charset="UTF-16BE" />
+  </component>
+</project>
