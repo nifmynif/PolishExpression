@@ -7,7 +7,7 @@ public class PolishExpression {
     public PolishExpression(String infixExpr) {
         operand = new Operand();
         operator = new Operator();
-        infixToPolish(infixExpr);
+        infixToPolish("(" + infixExpr + ")");
     }
 
     public String getPolish() {
@@ -23,18 +23,15 @@ public class PolishExpression {
         else if (ch == ')')
             operator.set(ch);
         else if (ch == '(') {
-            operand.set(operator.getLast());
+            while (operator.getSize() != 0 && operator.seeLast() != ')')
+                operand.add(operator.getLast());
             operator.getLast();
         } else {
-            combine();
+            operand.combine();
+            if (operator.getSize() != 0 && operator.precedence(ch) <= operator.precedence(operator.seeLast()))
+                operand.set(operator.getLast());
             operator.set(ch);
         }
         return infixToPolish(infixExpr.substring(0, infixExpr.length() - 1));
-    }
-
-    private void combine() {
-        if (operand.combine()) {
-            operand.set(operator.getLast());
-        }
     }
 }

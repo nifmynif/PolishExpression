@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Operand {
     private final ArrayList<StringBuilder> operand;
     private boolean flag = false;
+    private char prev;
 
     public Operand() {
         this.operand = new ArrayList<>();
@@ -25,40 +26,48 @@ public class Operand {
     }
 
     public void set(char last) {
+        if (!Character.isLetterOrDigit(prev))
+            flag = false;
         if (flag) {
             String temp = getLast().toString().trim() + last;
             operand.add(new StringBuilder(temp));
-        } else {
-            operand.add(new StringBuilder(" " + last + " "));
-            flag = true;
-        }
+        } else
+            add(last);
+        prev = last;
+    }
+
+    public void add(char last) {
+        operand.add(new StringBuilder(" " + last + " "));
+        flag = true;
     }
 
     public int getSize() {
         return operand.size();
     }
 
-    public boolean combine() {
+    public void combine() {
         flag = false;
+        prev = '*';
         try {
             if (getSize() > 1) {
                 StringBuilder operand1 = getLast();
                 StringBuilder operand2 = getLast();
-                operand.add(operand2.append(operand1));
-                return true;
+                operand.add(operand2.append(" ").append(operand1));
             }
         } catch (IndexOutOfBoundsException e) {
             throw new ArithmeticException("проверьте правильность введенной формулы");
         }
-        return false;
     }
 
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
         for (StringBuilder stringBuilder : operand) {
-            res.append(stringBuilder).append(" ");
+            res.append(stringBuilder);
         }
-        return res.reverse().toString().trim();
+        return res.reverse().toString()
+                .trim()
+                .replaceAll(" {2}", " ")
+                .replaceAll(" {2}", " ");
     }
 }
