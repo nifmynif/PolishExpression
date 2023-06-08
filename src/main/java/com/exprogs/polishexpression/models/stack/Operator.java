@@ -1,4 +1,4 @@
-package com.exprogs.polishexpression.models;
+package com.exprogs.polishexpression.models.stack;
 
 import java.util.ArrayList;
 
@@ -37,5 +37,11 @@ public class Operator implements Stack{
             case '^' -> 3;
             default -> -1;
         };
+    }
+    public boolean isCloseBracket() {
+        return getSize() != 0 && !peek().equals(")");
+    }
+    public boolean isLowerPrecedence(char ch) {
+        return getSize() != 0 && precedence(ch) <= precedence(peek().charAt(0));
     }
 }

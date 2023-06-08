@@ -1,6 +1,6 @@
-package com.exprogs.polishexpression.expression;
+package com.exprogs.polishexpression.models.expression;
 
-import com.exprogs.polishexpression.models.Operand;
+import com.exprogs.polishexpression.models.stack.Operand;
 
 import java.util.zip.DataFormatException;
 
@@ -8,6 +8,10 @@ public class PolishExpression extends Expression {
 
     public PolishExpression(String infixExpr) throws DataFormatException {
         super(infixExpr);
+    }
+
+    public PolishExpression() {
+        super();
     }
 
     public String work() {
@@ -28,13 +32,13 @@ public class PolishExpression extends Expression {
         else if (ch == ')')
             getOperator().push(ch);
         else if (ch == '(') {
-            while (getOperator().getSize() != 0 && !getOperator().peek().equals(")"))
+            while (getOperator().isCloseBracket())
                 getOperand().push(getOperator().pop().charAt(0));
             getOperator().pop();
         } else {
             getOperand().combine();
-            if (getOperator().getSize() != 0 && getOperator().precedence(ch) <= getOperator().precedence(getOperator().peek().charAt(0)))
-                getOperand().pushWithCheck(getOperator().pop().charAt(0));
+            if (getOperator().isLowerPrecedence(ch))
+                getOperand().push(getOperator().pop().charAt(0));
             getOperator().push(ch);
         }
         return infixToPolish(infixExpr.substring(0, infixExpr.length() - 1));

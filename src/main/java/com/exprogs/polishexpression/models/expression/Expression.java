@@ -1,20 +1,21 @@
-package com.exprogs.polishexpression.expression;
+package com.exprogs.polishexpression.models.expression;
 
-import com.exprogs.polishexpression.models.Operand;
-import com.exprogs.polishexpression.models.Operator;
+import com.exprogs.polishexpression.models.stack.Operand;
+import com.exprogs.polishexpression.models.stack.Operator;
 
 import java.util.zip.DataFormatException;
 
 public abstract class Expression {
-    private final Operator operator;
-    private final Operand operand;
+    private Operator operator;
+    private Operand operand;
 
     private String infixExpr;
 
+    public Expression() {
+    }
+
     public Expression(String infixExpr) throws DataFormatException {
         setInfixExpr(infixExpr);
-        operand = new Operand();
-        operator = new Operator();
     }
 
     public Operator getOperator() {
@@ -33,6 +34,8 @@ public abstract class Expression {
         if (infixExpr.isEmpty() || infixExpr.replaceAll("[0-9a-zA-Z+\\-*/()^]", "").length() > 0)
             throw new DataFormatException("в приведенной формуле присутствуют ошибки");
         this.infixExpr = infixExpr;
+        operand = new Operand();
+        operator = new Operator();
     }
 
     public abstract String work();

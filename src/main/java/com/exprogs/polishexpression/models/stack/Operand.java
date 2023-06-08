@@ -1,8 +1,8 @@
-package com.exprogs.polishexpression.models;
+package com.exprogs.polishexpression.models.stack;
 
 import java.util.ArrayList;
 
-public class Operand implements Stack{
+public class Operand implements Stack {
     private final ArrayList<StringBuilder> operand;
     private boolean flag = false;
     private char prev;
@@ -28,14 +28,15 @@ public class Operand implements Stack{
             flag = false;
         if (flag) {
             String temp = pop().trim() + last;
-            operand.add(new StringBuilder(temp));
+            operand.add(new StringBuilder(" " + temp + " "));
         } else
             push(last);
         prev = last;
     }
 
     public void push(char last) {
-        operand.add(new StringBuilder(last + " "));
+        operand.add(new StringBuilder(" " + last + " "));
+        prev = last;
         flag = true;
     }
 
@@ -43,17 +44,13 @@ public class Operand implements Stack{
         return operand.size();
     }
 
-    public void combine() throws ArithmeticException {
+    public void combine() throws IndexOutOfBoundsException {
         flag = false;
         prev = '*';
-        try {
-            if (getSize() > 1) {
-                String operand1 = pop();
-                String operand2 = pop();
-                operand.add(new StringBuilder(operand2 + (" ") + operand1 + " "));
-            }
-        } catch (IndexOutOfBoundsException e) {
-            throw new ArithmeticException("проверьте правильность введенной формулы");
+        if (getSize() > 1) {
+            String operand1 = pop();
+            String operand2 = pop();
+            operand.add(new StringBuilder(" " + operand2 + " " + operand1 + " "));
         }
     }
 

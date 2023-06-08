@@ -1,4 +1,4 @@
-package com.exprogs.polishexpression.models;
+package com.exprogs.polishexpression.models.stack;
 
 public interface Stack {
     String peek();
