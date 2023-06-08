@@ -11,7 +11,8 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
-    <TextField fx:id="input"/>
+    <Label text="введите формулу без пробелов и заменяя дробные числа 0,5 на 5/10"/>
+    <TextField fx:id="input" promptText="введите формулу без пробелов и заменяя дробные числа 0,5 на 5/10"/>
     <Label fx:id="output"/>
     <Label fx:id="mathOutput"/>
     <Button fx:id="run" text="Run" onAction="#onRunButtonClick"/>
