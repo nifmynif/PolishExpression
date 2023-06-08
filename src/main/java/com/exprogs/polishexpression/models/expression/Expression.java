@@ -30,6 +30,7 @@ public abstract class Expression {
         return infixExpr;
     }
 
+    //check input expression(only decimal, math symbols and english letters)
     public void setInfixExpr(String infixExpr) throws DataFormatException {
         if (infixExpr.isEmpty() || infixExpr.replaceAll("[0-9a-zA-Z+\\-*/()^]", "").length() > 0)
             throw new DataFormatException("в приведенной формуле присутствуют ошибки");

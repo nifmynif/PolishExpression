@@ -15,6 +15,7 @@ public abstract class Calculate {
         setExpression(expression);
     }
 
+    //check input expression(only decimal, math symbols and spaces)
     public void setExpression(String expression) throws DataFormatException {
         if (expression.isEmpty() || expression.replaceAll("[0-9+\\-*/^\\s]", "").length() > 0)
             throw new DataFormatException("мы не можем решить данное выражение");
@@ -33,8 +34,10 @@ public abstract class Calculate {
         return res;
     }
 
+    //calculate input expression
     public abstract String work();
 
+    //find and calculate input parameters
     public String math(String operator, String operand1, String operand2) {
         return switch (operator) {
             case "+" -> String.valueOf(Double.parseDouble(operand1) + Double.parseDouble(operand2));

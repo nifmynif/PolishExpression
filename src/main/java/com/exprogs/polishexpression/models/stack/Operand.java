@@ -11,18 +11,21 @@ public class Operand implements Stack {
         this.operand = new ArrayList<>();
     }
 
+    // get last element
     public String peek() throws IndexOutOfBoundsException {
         if (operand.isEmpty())
             throw new IndexOutOfBoundsException("операндов нет");
         return operand.get(operand.size() - 1).toString();
     }
 
+    // get and remove last element
     public String pop() throws IndexOutOfBoundsException {
         String tempOperand = peek();
         operand.remove(operand.size() - 1);
         return tempOperand;
     }
 
+    // set element with check if its one part (123 or abc)
     public void pushWithCheck(char last) throws IndexOutOfBoundsException {
         if (!Character.isLetterOrDigit(prev))
             flag = false;
@@ -34,6 +37,7 @@ public class Operand implements Stack {
         prev = last;
     }
 
+    // set last unit with check if its many parts (1 2 3 or a b c)
     public void push(char last) {
         operand.add(new StringBuilder(" " + last + " "));
         prev = last;
@@ -44,6 +48,7 @@ public class Operand implements Stack {
         return operand.size();
     }
 
+    //take 2 last elements and combine it to 1
     public void combine() throws IndexOutOfBoundsException {
         flag = false;
         prev = '*';

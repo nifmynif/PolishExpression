@@ -23,6 +23,7 @@ public class PolishExpression extends Expression {
         return getRes();
     }
 
+    //convert infix expression to polish
     private Operand infixToPolish(String infixExpr) {
         if (infixExpr.isEmpty())
             return null;
