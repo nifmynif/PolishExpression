@@ -26,7 +26,7 @@ public class PolishCalculate extends Calculate {
             }
         }
         if (arrayExpression.get(0).equals("-"))
-            setRes(arrayExpression.get(0) + arrayExpression.get(1));
+            setRes(String.valueOf(Double.parseDouble(arrayExpression.get(1)) * (-1)));
         else
             setRes(arrayExpression.get(0));
         return getRes();

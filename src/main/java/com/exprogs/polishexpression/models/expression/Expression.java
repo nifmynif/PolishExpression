@@ -33,7 +33,10 @@ public abstract class Expression {
     public void setInfixExpr(String infixExpr) throws DataFormatException {
         if (infixExpr.isEmpty() || infixExpr.replaceAll("[0-9a-zA-Z+\\-*/()^]", "").length() > 0)
             throw new DataFormatException("в приведенной формуле присутствуют ошибки");
-        this.infixExpr = infixExpr;
+        if (infixExpr.charAt(0) == '+')
+            this.infixExpr = infixExpr.substring(1);
+        else
+            this.infixExpr = infixExpr;
         operand = new Operand();
         operator = new Operator();
     }

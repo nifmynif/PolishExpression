@@ -18,16 +18,20 @@ public class HelloController {
 
     @FXML
     protected void onRunButtonClick() {
-        //"(1+(2+33*44))";
-        //"a+b*(c^d-e)^(f*g gg+h)-i*2";
-        //String expression = "1+1+1+11";
+        output.setText("");
+        mathOutput.setText("");
         try {
             Expression p = new PolishExpression(input.getText());
             output.setText(p.work());
-            Calculate calculate = new PolishCalculate(p.getRes());
-            mathOutput.setText(calculate.work());
+            try {
+                Calculate calculate = new PolishCalculate(p.getRes());
+                mathOutput.setText(calculate.work());
+            } catch (Exception e) {
+                mathOutput.setText(e.getMessage());
+            }
         } catch (Exception e) {
             output.setText(e.getMessage());
         }
+
     }
 }
