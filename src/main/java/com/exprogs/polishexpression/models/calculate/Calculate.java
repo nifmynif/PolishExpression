@@ -8,6 +8,7 @@ public abstract class Calculate {
     private String res;
 
     public Calculate() {
+        expression = "0";
     }
 
     public Calculate(String expression) throws DataFormatException {

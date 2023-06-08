@@ -10,7 +10,7 @@ public class PolishExpression extends Expression {
         super(infixExpr);
     }
 
-    public PolishExpression() {
+    public PolishExpression() throws DataFormatException {
         super();
     }
 

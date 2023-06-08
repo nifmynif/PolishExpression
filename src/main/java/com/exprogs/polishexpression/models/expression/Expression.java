@@ -8,10 +8,10 @@ import java.util.zip.DataFormatException;
 public abstract class Expression {
     private Operator operator;
     private Operand operand;
-
     private String infixExpr;
 
-    public Expression() {
+    public Expression() throws DataFormatException {
+        setInfixExpr("0");
     }
 
     public Expression(String infixExpr) throws DataFormatException {

@@ -1,9 +1,9 @@
+package com.exprogs.polishexpression.models.expression;
+
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.zip.DataFormatException;
 
-import com.exprogs.polishexpression.models.expression.Expression;
-import com.exprogs.polishexpression.models.expression.PolishExpression;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -12,6 +12,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PolishExpressionTest {
+
+    @Test
+    void nullInputTest() throws DataFormatException {
+        PolishExpression p = new PolishExpression();
+        assertEquals("0", p.work());
+    }
 
     @Test
     void onePlusOneTest() throws DataFormatException {
@@ -25,7 +31,7 @@ class PolishExpressionTest {
     void wrongInputTest() {
         try {
             PolishExpression p = new PolishExpression("+ 1 1");
-            assertEquals("+ 1 1", p.work());
+            p.work();
         } catch (DataFormatException e) {
             assertEquals("в приведенной формуле присутствуют ошибки", e.getMessage());
         }

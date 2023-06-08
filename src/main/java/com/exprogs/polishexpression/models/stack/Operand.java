@@ -63,6 +63,7 @@ public class Operand implements Stack {
         return res.reverse().toString()
                 .trim()
                 .replaceAll(" {2}", " ")
+                .replaceAll(" {2}", " ")
                 .replaceAll(" {2}", " ");
     }
 }
