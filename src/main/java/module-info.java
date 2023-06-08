@@ -5,4 +5,8 @@ module com.exprogs.polishexpression {
 
     opens com.exprogs.polishexpression to javafx.fxml;
     exports com.exprogs.polishexpression;
+    exports com.exprogs.polishexpression.expression;
+    opens com.exprogs.polishexpression.expression to javafx.fxml;
+    exports com.exprogs.polishexpression.models;
+    opens com.exprogs.polishexpression.models to javafx.fxml;
 }

@@ -1,8 +1,8 @@
-package com.exprogs.polishexpression;
+package com.exprogs.polishexpression.models;
 
 import java.util.ArrayList;
 
-public class Operator {
+public class Operator implements Stack{
 
     private final ArrayList<Character> operator;
 
@@ -10,21 +10,19 @@ public class Operator {
         this.operator = new ArrayList<>();
     }
 
-    public Character seeLast() {
+    public String peek() {
         if (operator.isEmpty())
             throw new IndexOutOfBoundsException("операторов нет");
-        return operator.get(operator.size() - 1);
+        return operator.get(operator.size() - 1).toString();
     }
 
-    public Character getLast() {
-        if (operator.isEmpty())
-            throw new IndexOutOfBoundsException("операторов нет");
-        Character tempOperator = operator.get(operator.size() - 1);
+    public String pop() {
+        String tempOperator = peek();
         operator.remove(operator.size() - 1);
         return tempOperator;
     }
 
-    public void set(char last) {
+    public void push(char last) {
         operator.add(last);
     }
 
