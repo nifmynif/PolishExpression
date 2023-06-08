@@ -14,5 +14,5 @@
     <TextField fx:id="input"/>
     <Label fx:id="output"/>
     <Label fx:id="mathOutput"/>
-    <Button text="Run" onAction="#onRunButtonClick"/>
+    <Button fx:id="run" text="Run" onAction="#onRunButtonClick"/>
 </VBox>

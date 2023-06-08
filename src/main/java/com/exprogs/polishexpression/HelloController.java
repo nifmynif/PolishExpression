@@ -4,7 +4,9 @@ import com.exprogs.polishexpression.models.calculate.Calculate;
 import com.exprogs.polishexpression.models.calculate.PolishCalculate;
 import com.exprogs.polishexpression.models.expression.Expression;
 import com.exprogs.polishexpression.models.expression.PolishExpression;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -15,6 +17,13 @@ public class HelloController {
     private Label output;
     @FXML
     private Label mathOutput;
+    @FXML
+    private Button run;
+
+    @FXML
+    public void initialize() {
+        run.disableProperty().bind(Bindings.isEmpty(input.textProperty()));
+    }
 
     @FXML
     protected void onRunButtonClick() {
