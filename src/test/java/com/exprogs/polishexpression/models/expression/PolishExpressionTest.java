@@ -15,23 +15,23 @@ class PolishExpressionTest {
 
     @Test
     void nullInputTest() throws DataFormatException {
-        PolishExpression p = new PolishExpression();
-        assertEquals("0", p.calculateFrom());
+        PolishExpression polishExpression = new PolishExpression();
+        assertEquals("0", polishExpression.calculateFrom());
     }
 
     @Test
     void onePlusOneTest() throws DataFormatException {
-        PolishExpression p = new PolishExpression("1+1");
-        assertEquals("+ 1 1", p.calculateFrom());
-        p.setInfixExpr("1+1");
-        assertEquals("+ 1 1", p.calculateFrom());
+        PolishExpression polishExpression = new PolishExpression("1+1");
+        assertEquals("+ 1 1", polishExpression.calculateFrom());
+        polishExpression.setInfixExpr("1+1");
+        assertEquals("+ 1 1", polishExpression.calculateFrom());
     }
 
     @Test
     void wrongInputTest() {
         try {
-            PolishExpression p = new PolishExpression("+ 1 1");
-            p.calculateFrom();
+            PolishExpression polishExpression = new PolishExpression("+ 1 1");
+            polishExpression.calculateFrom();
         } catch (DataFormatException e) {
             assertEquals("в приведенной формуле присутствуют ошибки", e.getMessage());
         }
@@ -44,9 +44,12 @@ class PolishExpressionTest {
             Expression exception = new PolishExpression();
             Sheet sheet = wb.getSheet("Лист1");
             for (Row row : sheet) {
-                exception.setInfixExpr(row.getCell(0).getStringCellValue());
-                assertEquals(row.getCell(1).getStringCellValue(), exception.calculateFrom());
-            }
+                try {
+                    exception.setInfixExpr(row.getCell(0).getStringCellValue());
+                    assertEquals(row.getCell(1).getStringCellValue(), exception.calculateFrom());
+                } catch (Exception e) {
+                    assertEquals(row.getCell(1).getStringCellValue(), e.getMessage());
+                }}
         }
     }
 }

@@ -13,7 +13,7 @@ public class Operator implements Stack {
     //get last element
     public String peek() {
         if (operator.isEmpty())
-            throw new IndexOutOfBoundsException("операторов нет");
+            throw new IndexOutOfBoundsException("нет хватает скобок");
         return operator.get(operator.size() - 1).toString();
     }
 
@@ -44,12 +44,12 @@ public class Operator implements Stack {
     }
 
     //check in a loop that takes statements up to the opening brace
-    public boolean isCloseBracket() {
-        return getSize() != 0 && !peek().equals(")");
+    public boolean isLeftBracket() {
+        return getSize() == 0 || peek().equals("(");
     }
 
     //check precedence of input math symbol
-    public boolean isLowerPrecedence(char ch) {
-        return getSize() != 0 && precedence(ch) <= precedence(peek().charAt(0));
+    public int checkPrecedence(char ch) {
+        return precedence(ch) - precedence(peek().charAt(0));
     }
 }

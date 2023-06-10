@@ -30,7 +30,7 @@ public class Operand implements Stack {
         if (!Character.isLetterOrDigit(prev) && prev != '.')
             flag = false;
         if (flag) {
-            String temp = pop().trim() + last;
+            String temp = last + pop().trim();
             operand.add(new StringBuilder(" " + temp + " "));
         } else
             push(last);
@@ -61,11 +61,11 @@ public class Operand implements Stack {
 
     @Override
     public String toString() {
-        StringBuilder res = new StringBuilder();
-        for (StringBuilder stringBuilder : operand) {
-            res.append(stringBuilder);
+        StringBuilder result = new StringBuilder();
+        for (StringBuilder element : operand) {
+            result.append(element);
         }
-        return res.reverse().toString()
+        return result.reverse().toString()
                 .trim()
                 .replaceAll(" {2}", " ")
                 .replaceAll(" {2}", " ")

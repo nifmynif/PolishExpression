@@ -6,9 +6,7 @@ import com.exprogs.polishexpression.models.expression.Expression;
 import com.exprogs.polishexpression.models.expression.PolishExpression;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class HelloController {
     @FXML
@@ -19,6 +17,8 @@ public class HelloController {
     private Label mathOutput;
     @FXML
     private Button run;
+    Expression expression;
+    Calculate calculate;
 
     @FXML
     public void initialize() {
@@ -30,11 +30,12 @@ public class HelloController {
         output.setText("");
         mathOutput.setText("");
         try {
-            Expression p = new PolishExpression(input.getText());
-            output.setText(p.calculateFrom());
+            expression =new PolishExpression(input.getText());
+            calculate = new PolishCalculate();
+            calculate.setExpression(expression);
+            output.setText(expression.calculateFrom());
             try {
-                Calculate calculate = new PolishCalculate(p.getRes());
-                mathOutput.setText(calculate.work());
+                mathOutput.setText(calculate.calculate());
             } catch (Exception e) {
                 mathOutput.setText(e.getMessage());
             }
