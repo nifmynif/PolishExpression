@@ -44,9 +44,12 @@ public class PolishExpression extends Expression {
             getOperand().combine();
             if (getOperator().isLeftBracket())
                 getOperator().push(ch);
-            else if (getOperator().checkPrecedence(ch) <= 0) {
+            else if (getOperator().checkPrecedence(ch) < 0) {
                 while (!getOperator().peek().equals("("))
                     getOperand().push(getOperator().pop().charAt(0));
+                getOperator().push(ch);
+            } else if (getOperator().checkPrecedence(ch) == 0) {
+                getOperand().push(getOperator().pop().charAt(0));
                 getOperator().push(ch);
             } else
                 getOperator().push(ch);
