@@ -16,22 +16,22 @@ class PolishExpressionTest {
     @Test
     void nullInputTest() throws DataFormatException {
         PolishExpression p = new PolishExpression();
-        assertEquals("0", p.work());
+        assertEquals("0", p.calculateFrom());
     }
 
     @Test
     void onePlusOneTest() throws DataFormatException {
         PolishExpression p = new PolishExpression("1+1");
-        assertEquals("+ 1 1", p.work());
+        assertEquals("+ 1 1", p.calculateFrom());
         p.setInfixExpr("1+1");
-        assertEquals("+ 1 1", p.work());
+        assertEquals("+ 1 1", p.calculateFrom());
     }
 
     @Test
     void wrongInputTest() {
         try {
             PolishExpression p = new PolishExpression("+ 1 1");
-            p.work();
+            p.calculateFrom();
         } catch (DataFormatException e) {
             assertEquals("в приведенной формуле присутствуют ошибки", e.getMessage());
         }
@@ -45,7 +45,7 @@ class PolishExpressionTest {
             Sheet sheet = wb.getSheet("Лист1");
             for (Row row : sheet) {
                 exception.setInfixExpr(row.getCell(0).getStringCellValue());
-                assertEquals(row.getCell(1).getStringCellValue(), exception.work());
+                assertEquals(row.getCell(1).getStringCellValue(), exception.calculateFrom());
             }
         }
     }

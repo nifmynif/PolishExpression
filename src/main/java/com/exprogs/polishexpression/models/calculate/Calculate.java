@@ -5,7 +5,7 @@ import java.util.zip.DataFormatException;
 public abstract class Calculate {
     private String expression;
 
-    private String res;
+    private String result;
 
     public Calculate() {
         expression = "0";
@@ -17,21 +17,21 @@ public abstract class Calculate {
 
     //check input expression(only decimal, math symbols and spaces)
     public void setExpression(String expression) throws DataFormatException {
-        if (expression.isEmpty() || expression.replaceAll("[0-9+\\-*/^\\s]", "").length() > 0)
+        if (expression.isEmpty() || expression.replaceAll("[0-9+\\-*/^\\s.]", "").length() > 0)
             throw new DataFormatException("мы не можем решить данное выражение");
         this.expression = expression;
     }
 
-    public void setRes(String res) {
-        this.res = res;
+    public void setResult(String result) {
+        this.result = result;
     }
 
     public String getExpression() {
         return expression;
     }
 
-    public String getRes() {
-        return res;
+    public String getResult() {
+        return result;
     }
 
     //calculate input expression

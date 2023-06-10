@@ -27,7 +27,7 @@ public class Operand implements Stack {
 
     // set element with check if its one part (123 or abc)
     public void pushWithCheck(char last) throws IndexOutOfBoundsException {
-        if (!Character.isLetterOrDigit(prev))
+        if (!Character.isLetterOrDigit(prev) && prev != '.')
             flag = false;
         if (flag) {
             String temp = pop().trim() + last;

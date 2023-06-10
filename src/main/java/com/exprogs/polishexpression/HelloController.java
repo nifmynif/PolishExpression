@@ -31,7 +31,7 @@ public class HelloController {
         mathOutput.setText("");
         try {
             Expression p = new PolishExpression(input.getText());
-            output.setText(p.work());
+            output.setText(p.calculateFrom());
             try {
                 Calculate calculate = new PolishCalculate(p.getRes());
                 mathOutput.setText(calculate.work());

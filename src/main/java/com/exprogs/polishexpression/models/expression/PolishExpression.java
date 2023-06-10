@@ -14,7 +14,7 @@ public class PolishExpression extends Expression {
         super();
     }
 
-    public String work() {
+    public String calculateFrom() {
         infixToPolish("(" + getInfixExpr() + ")");
         return getPolish();
     }
@@ -28,7 +28,7 @@ public class PolishExpression extends Expression {
         if (infixExpr.isEmpty())
             return null;
         char ch = infixExpr.charAt(infixExpr.length() - 1);
-        if (Character.isLetterOrDigit(ch))
+        if (Character.isLetterOrDigit(ch) || ch == '.')
             getOperand().pushWithCheck(ch);
         else if (ch == ')')
             getOperator().push(ch);
