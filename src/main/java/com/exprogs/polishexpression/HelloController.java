@@ -36,9 +36,11 @@ public class HelloController {
             try {
                 mathOutput.setText(calculate.calculate());
             } catch (Exception e) {
+                System.out.println(e.getMessage());
                 mathOutput.setText(e.getMessage());
             }
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             output.setText(e.getMessage());
         }
 

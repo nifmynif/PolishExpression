@@ -33,6 +33,7 @@ class PolishExpressionTest {
             PolishExpression polishExpression = new PolishExpression("+ 1 1");
             polishExpression.calculateFrom();
         } catch (DataFormatException e) {
+            System.out.println(e.getMessage());
             assertEquals("в приведенной формуле присутствуют ошибки", e.getMessage());
         }
     }
@@ -48,6 +49,7 @@ class PolishExpressionTest {
                     exception.setInfixExpr(row.getCell(0).getStringCellValue());
                     assertEquals(row.getCell(1).getStringCellValue(), exception.calculateFrom());
                 } catch (Exception e) {
+                    System.out.println(e.getMessage());
                     assertEquals(row.getCell(1).getStringCellValue(), e.getMessage());
                 }}
         }

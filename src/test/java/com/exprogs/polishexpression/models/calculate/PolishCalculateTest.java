@@ -1,6 +1,5 @@
 package com.exprogs.polishexpression.models.calculate;
 
-import com.exprogs.polishexpression.models.expression.Expression;
 import com.exprogs.polishexpression.models.expression.PolishExpression;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
@@ -21,6 +20,7 @@ class PolishCalculateTest {
             Calculate p = new PolishCalculate(new PolishExpression(";"));
             p.calculate();
         } catch (DataFormatException e) {
+            System.out.println(e.getMessage());
             assertEquals("в приведенной формуле присутствуют ошибки", e.getMessage());
         }
     }
@@ -37,6 +37,7 @@ class PolishCalculateTest {
                     calculate.getExpression().calculateFrom();
                     assertEquals(row.getCell(1).getStringCellValue(), calculate.calculate());
                 } catch (DataFormatException e) {
+                    System.out.println(e.getMessage());
                     assertEquals(row.getCell(1).getStringCellValue(), e.getMessage());
                 }
             }
