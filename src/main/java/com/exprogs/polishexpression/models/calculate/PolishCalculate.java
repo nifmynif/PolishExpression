@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.zip.DataFormatException;
 
 public class PolishCalculate extends Calculate {
-    public PolishCalculate() throws DataFormatException {
-        super();
-    }
 
     public PolishCalculate(Expression expression) throws DataFormatException {
         super(expression);
@@ -46,9 +43,7 @@ public class PolishCalculate extends Calculate {
                     i = -1;
                 }
             }
-        if (arrayExpression.get(0).equals("-"))
-            setResult(String.valueOf(Double.parseDouble(arrayExpression.get(1)) * (-1)));
-        else if (arrayExpression.get(0).equals("+"))
+        if (arrayExpression.get(0).equals("+"))
             setResult(arrayExpression.get(1));
         else if (arrayExpression.get(0).matches("[*/^]"))
             throw new DataFormatException("у вас ошибка в формуле");

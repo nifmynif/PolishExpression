@@ -29,14 +29,12 @@ class PolishCalculateTest {
     void testDDT() throws Exception {
         try (InputStream in = new FileInputStream("src/test/resources/DDTCalculate.xls");
              HSSFWorkbook wb = new HSSFWorkbook(in)) {
-            Calculate calculate = new PolishCalculate();
-            Expression expression = new PolishExpression();
-            calculate.setExpression(expression);
+            Calculate calculate = new PolishCalculate(new PolishExpression());
             Sheet sheet = wb.getSheet("Лист1");
             for (Row row : sheet) {
                 try {
                     calculate.getExpression().setInfixExpr(row.getCell(0).getStringCellValue());
-                    expression.calculateFrom();
+                    calculate.getExpression().calculateFrom();
                     assertEquals(row.getCell(1).getStringCellValue(), calculate.calculate());
                 } catch (DataFormatException e) {
                     assertEquals(row.getCell(1).getStringCellValue(), e.getMessage());

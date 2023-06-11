@@ -31,9 +31,8 @@ public class HelloController {
         mathOutput.setText("");
         try {
             expression =new PolishExpression(input.getText());
-            calculate = new PolishCalculate();
-            calculate.setExpression(expression);
-            output.setText(expression.calculateFrom());
+            calculate = new PolishCalculate(expression);
+            output.setText(calculate.getExpression().calculateFrom());
             try {
                 mathOutput.setText(calculate.calculate());
             } catch (Exception e) {

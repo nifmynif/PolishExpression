@@ -1,68 +1,52 @@
 package com.exprogs.polishexpression.models.stack;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class Operand implements Stack {
-    private final ArrayList<StringBuilder> operand;
+public class Operand extends AbstructQueue {
     private boolean flag = false;
     private char prev;
 
+
     public Operand() {
-        this.operand = new ArrayList<>();
-    }
-
-    // get last element
-    public String peek() throws IndexOutOfBoundsException {
-        if (operand.isEmpty())
-            throw new IndexOutOfBoundsException("операндов нет");
-        return operand.get(operand.size() - 1).toString();
-    }
-
-    // get and remove last element
-    public String pop() throws IndexOutOfBoundsException {
-        String tempOperand = peek();
-        operand.remove(operand.size() - 1);
-        return tempOperand;
+        super(new ArrayList<StringBuilder>());
     }
 
     // set element with check if its one part (123 or abc)
-    public void pushWithCheck(char last) throws IndexOutOfBoundsException {
+    public void addWithCheck(char last) throws IndexOutOfBoundsException {
         if (!Character.isLetterOrDigit(prev) && prev != '.')
             flag = false;
         if (flag) {
-            String temp = last + pop().trim();
-            operand.add(new StringBuilder(" " + temp + " "));
+            String temp = last + Objects.requireNonNull(poll()).toString().trim();
+            super.add(new StringBuilder(" " + temp + " "));
         } else
-            push(last);
+            add(last);
         prev = last;
     }
 
     // set last unit with check if its many parts (1 2 3 or a b c)
-    public void push(char last) {
-        operand.add(new StringBuilder(" " + last + " "));
-        prev = last;
+    @Override
+    public boolean add(Object o) {
+        prev = (char) o;
         flag = true;
-    }
-
-    public int getSize() {
-        return operand.size();
+        return super.add(new StringBuilder(" " + o + " "));
     }
 
     //take 2 last elements and combine it to 1
     public void combine() throws IndexOutOfBoundsException {
         flag = false;
         prev = '*';
-        if (getSize() > 1) {
-            String operand1 = pop();
-            String operand2 = pop();
-            operand.add(new StringBuilder(" " + operand2 + " " + operand1 + " "));
+        if (size() > 1) {
+            String operand1 = (String) poll();
+            String operand2 = (String) poll();
+            super.add(new StringBuilder(" " + operand2 + " " + operand1 + " "));
         }
     }
 
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for (StringBuilder element : operand) {
+        for (Object element : getQueue()) {
             result.append(element);
         }
         return result.reverse().toString()

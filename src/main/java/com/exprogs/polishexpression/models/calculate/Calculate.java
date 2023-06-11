@@ -7,16 +7,6 @@ import java.util.zip.DataFormatException;
 public abstract class Calculate {
     private String result;
 
-    public Calculate() throws DataFormatException {
-        expression = new Expression() {
-            @Override
-            public String calculateFrom() {
-                return null;
-            }
-        };
-        expression.setInfixExpr("0");
-    }
-
     public Calculate(Expression expression) {
         setExpression(expression);
     }
