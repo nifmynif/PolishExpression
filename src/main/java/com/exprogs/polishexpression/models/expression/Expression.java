@@ -50,8 +50,12 @@ public abstract class Expression {
         operand = new Operand();
         operator = new Operator();
     }
-
-    public abstract String calculateFrom();
+    public String calculateFrom(String infixExpr) throws DataFormatException {
+        setInfixExpr(infixExpr);
+        calculateFrom();
+        return getResult();
+    }
+    public abstract String calculateFrom() throws DataFormatException;
 
     public String getResult() {
         return getOperand().toString();

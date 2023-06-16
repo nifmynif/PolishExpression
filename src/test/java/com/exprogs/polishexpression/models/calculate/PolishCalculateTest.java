@@ -1,6 +1,5 @@
 package com.exprogs.polishexpression.models.calculate;
 
-import com.exprogs.polishexpression.models.expression.PolishExpression;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -17,7 +16,8 @@ class PolishCalculateTest {
     @Test
     void wrongInputTest() {
         try {
-            Calculate p = new PolishCalculate(new PolishExpression(";"));
+            Calculate p = new PolishCalculate();
+            p.getExpression().setInfixExpr(";");
             p.calculate();
         } catch (DataFormatException e) {
             System.out.println(e.getMessage());
@@ -29,12 +29,11 @@ class PolishCalculateTest {
     void testDDT() throws Exception {
         try (InputStream in = new FileInputStream("src/test/resources/DDTCalculate.xls");
              HSSFWorkbook wb = new HSSFWorkbook(in)) {
-            Calculate calculate = new PolishCalculate(new PolishExpression());
+            Calculate calculate = new PolishCalculate();
             Sheet sheet = wb.getSheet("Лист1");
             for (Row row : sheet) {
                 try {
-                    calculate.getExpression().setInfixExpr(row.getCell(0).getStringCellValue());
-                    calculate.getExpression().calculateFrom();
+                    calculate.getExpression().calculateFrom(row.getCell(0).getStringCellValue());
                     assertEquals(row.getCell(1).getStringCellValue(), calculate.calculate());
                 } catch (DataFormatException e) {
                     System.out.println(e.getMessage());

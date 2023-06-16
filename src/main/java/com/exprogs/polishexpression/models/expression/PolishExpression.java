@@ -2,7 +2,6 @@ package com.exprogs.polishexpression.models.expression;
 
 import com.exprogs.polishexpression.models.stack.Operand;
 
-import java.util.Objects;
 import java.util.zip.DataFormatException;
 
 public class PolishExpression extends Expression {
@@ -15,9 +14,9 @@ public class PolishExpression extends Expression {
         super();
     }
 
-    public String calculateFrom() {
+    public String calculateFrom() throws DataFormatException {
         infixToPolish("(" + getInfixExpr() + ")");
-         return getPolish();
+        return getPolish();
     }
 
     public String getPolish() {
@@ -25,7 +24,7 @@ public class PolishExpression extends Expression {
     }
 
     //convert infix expression to polish
-    private Operand infixToPolish(String infixExpr) {
+    private Operand infixToPolish(String infixExpr) throws DataFormatException {
         if (infixExpr.isEmpty())
             return null;
         char ch = infixExpr.charAt(0);
@@ -34,20 +33,21 @@ public class PolishExpression extends Expression {
         else if (ch == '(')
             getOperator().add(ch);
         else if (ch == ')') {
-            if (getOperator().size() != 0)
-                while (!getOperator().element().equals("("))
-                    getOperand().add(Objects.requireNonNull(getOperator().poll()).toString().charAt(0));
-            getOperator().poll();
+            if (getOperator().size() != 0) {
+                while (getOperator().peek() != '(')
+                    getOperand().add(getOperator().pop());
+                getOperator().pop();
+            }else throw new DataFormatException("нет хватает скобок");
         } else {
             getOperand().combine();
             if (getOperator().isLeftBracket())
                 getOperator().add(ch);
             else if (getOperator().checkPrecedence(ch) < 0) {
-                while (!getOperator().element().equals("("))
-                    getOperand().add(Objects.requireNonNull(getOperator().poll()).toString().charAt(0));
+                while (getOperator().peek() != '(')
+                    getOperand().add(getOperator().pop());
                 getOperator().add(ch);
             } else if (getOperator().checkPrecedence(ch) == 0) {
-                getOperand().add(Objects.requireNonNull(getOperator().poll()).toString().charAt(0));
+                getOperand().add(getOperator().pop());
                 getOperator().add(ch);
             } else
                 getOperator().add(ch);

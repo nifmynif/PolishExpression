@@ -1,6 +1,6 @@
 package com.exprogs.polishexpression.models.calculate;
 
-import com.exprogs.polishexpression.models.expression.Expression;
+import com.exprogs.polishexpression.models.expression.PolishExpression;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,8 @@ import java.util.zip.DataFormatException;
 
 public class PolishCalculate extends Calculate {
 
-    public PolishCalculate(Expression expression) throws DataFormatException {
-        super(expression);
+    public PolishCalculate() throws DataFormatException {
+        super(new PolishExpression());
     }
 
     public String calculate() throws DataFormatException {

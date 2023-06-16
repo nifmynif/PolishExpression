@@ -46,12 +46,12 @@ class PolishExpressionTest {
             Sheet sheet = wb.getSheet("Лист1");
             for (Row row : sheet) {
                 try {
-                    exception.setInfixExpr(row.getCell(0).getStringCellValue());
-                    assertEquals(row.getCell(1).getStringCellValue(), exception.calculateFrom());
+                    assertEquals(row.getCell(1).getStringCellValue(), exception.calculateFrom(row.getCell(0).getStringCellValue()));
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                     assertEquals(row.getCell(1).getStringCellValue(), e.getMessage());
-                }}
+                }
+            }
         }
     }
 }
