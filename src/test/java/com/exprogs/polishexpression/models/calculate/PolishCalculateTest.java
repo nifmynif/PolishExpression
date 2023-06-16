@@ -16,9 +16,9 @@ class PolishCalculateTest {
     @Test
     void wrongInputTest() {
         try {
-            Calculate p = new PolishCalculate();
-            p.getExpression().setInfixExpr(";");
-            p.calculate();
+            Calculate polishCalculate = new PolishCalculate();
+            polishCalculate.getExpression().setInfixExpr(";");
+            polishCalculate.calculate();
         } catch (DataFormatException e) {
             System.out.println(e.getMessage());
             assertEquals("в приведенной формуле присутствуют ошибки", e.getMessage());
